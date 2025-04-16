@@ -16,7 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from lavishBnB import views as f_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', f_views.Home, name ='Home'),
+    path('properties/', f_views.properties, name ='properties'),
+    path('rent_details/', f_views.rent_details, name ='rent_details'),
 ]
