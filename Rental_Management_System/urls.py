@@ -15,6 +15,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from . import settings
+from django.conf.urls.static import static
 from django.urls import path
 from lavishBnB import views as f_views
 
@@ -23,4 +25,4 @@ urlpatterns = [
     path('', f_views.Home, name ='Home'),
     path('properties/', f_views.properties, name ='properties'),
     path('rent_details/', f_views.rent_details, name ='rent_details'),
-]
+]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
