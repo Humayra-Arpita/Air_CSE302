@@ -24,5 +24,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', f_views.Home, name ='Home'),
     path('properties/', f_views.properties, name ='properties'),
+    path('cover/', f_views.cover, name ='cover'),
     path('rent_details/', f_views.rent_details, name ='rent_details'),
+    path('upload_property/',f_views.upload_property,name='upload_property'),
+    path('delete_property/<str:id>',f_views.delete_property,name = 'delete_property'),
+    path('login/', f_views.user_login, name='login'),
+
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

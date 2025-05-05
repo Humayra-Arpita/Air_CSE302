@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>properties</h1>
+<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+    <button type="button" onclick="alert('Button clicked!')">Delete</button>
+
+    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'upload_properties'%}">Add Properties</a></div>
+   
+
+</div>
+{% endblock %}
