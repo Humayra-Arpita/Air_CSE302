@@ -3,121 +3,240 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LavishBnB</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', sans-serif;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LavishBnB</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
 
-        body {
-            background: white;
-            color: #333;
-        }
+    body {
+      background: white;
+      color: #333;
+    }
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 40px;
-            border-bottom: 2px solid #222;
-            background: #fff;
-        }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      border-bottom: 2px solid #222;
+      background: #fff;
+      position: relative;
+      z-index: 10;
+    }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #4a4a1d;
-        }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #4a4a1d;
+    }
 
-        nav a,
-        .dropdown {
-            margin: 0 15px;
-            font-weight: bold;
-            font-style: italic;
-            cursor: pointer;
-        }
+    nav {
+      display: flex;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+    }
 
-        .user-icon {
-            border: 1px solid orange;
-            border-radius: 50%;
-            padding: 10px;
-        }
+    nav a,
+    .dropdown {
+      margin: 0 15px;
+      font-weight: bold;
+      font-style: italic;
+      cursor: pointer;
+      position: relative;
+      color: #333;
+      text-decoration: none;
+      display: inline-block;
+    }
 
-        .hero {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 50px;
-        }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #f9f9f9;
+      min-width: 180px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      border-radius: 5px;
+    }
 
-        .hero-text {
-            flex: 1;
-        }
+    .dropdown-content a {
+      color: #333;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      font-style: normal;
+    }
 
-        .hero-text h1 {
-            font-size: 3rem;
-            font-style: italic;
-            color: #4a4a1d;
-            margin-bottom: 30px;
-        }
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
 
-        button {
-            display: block;
-            padding: 15px 30px;
-            margin: 15px 0;
-            border: none;
-            font-size: 1.2rem;
-            font-style: italic;
-            border-radius: 25px;
-            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            background: linear-gradient(to right, #ffce58, #ff6e6e);
-            color: #000;
-        }
+    .dropdown:hover .dropdown-content,
+    .dropdown-content:hover {
+      display: block;
+    }
 
-        .hero-image {
-            flex: 1;
-            text-align: right;
-        }
+    .profile-icon {
+      border: 1px solid orange;
+      border-radius: 50%;
+      padding: 10px;
+      cursor: pointer;
+      position: relative;
+    }
 
-        .hero-image img {
-            max-width: 100%;
-            height: auto;
-        }
-    </style>
+    .profile-dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: #f9f9f9;
+      min-width: 200px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      border-radius: 5px;
+    }
 
+    .profile-dropdown a {
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      color: #333;
+      font-style: normal;
+    }
+
+    .profile-dropdown a:hover {
+      background-color: #f1f1f1;
+    }
+
+    .profile-icon:hover .profile-dropdown {
+      display: block;
+    }
+
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 50px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-text {
+      flex: 1;
+    }
+
+    .hero-text h1 {
+      font-size: 3rem;
+      font-style: italic;
+      color: #4a4a1d;
+      margin-bottom: 30px;
+    }
+
+    button {
+      display: block;
+      padding: 15px 30px;
+      margin: 15px 0;
+      border: none;
+      font-size: 1.2rem;
+      font-style: italic;
+      border-radius: 25px;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      background: linear-gradient(to right, #ffce58, #ff6e6e);
+      color: #000;
+    }
+
+    .hero-image {
+      flex: 1;
+      text-align: right;
+    }
+
+    .hero-image img {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
 </head>
 
 <body>
-    <header>
+  <header>
     <div class="logo">🏠 <span>LavishBnB</span></div>
     <nav>
       <a href="#">Home</a>
-      <a href="#">Services ▼</a>
-      <a href="#">Help ▼</a>
-      <a href="#">Contact ▼</a>
+
+      <!-- Services Dropdown -->
+      <div class="dropdown">
+        <span>Services ▼</span>
+        <div class="dropdown-content">
+          <a href="#">Hills</a>
+          <a href="#">Trending</a>
+          <a href="#">Mansion</a>
+          <a href="#">Camping</a>
+          <a href="#">Farmhouse</a>
+          <a href="#">Beach Front</a>
+          <a href="#">House Boats</a>
+          <a href="#">Top District</a>
+          <a href="#">Amazing Pools</a>
+          <a href="#">Historical Homes</a>
+        </div>
+      </div>
+
+      <!-- Help Dropdown -->
+      <div class="dropdown">
+        <span>Help ▼</span>
+        <div class="dropdown-content">
+          <a href="#">Host HelpCentre</a>
+          <a href="#">Guest HelpCentre</a>
+          <a href="#">Guidance Centre</a>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div class="dropdown">
+        <span>Contact ▼</span>
+        <div class="dropdown-content">
+          <a href="#">Send Message</a>
+          <a href="#">Online Booking</a>
+          <a href="#">HelpLine</a>
+        </div>
+      </div>
     </nav>
-    <div class="profile-icon">👤</div>
+
+    <!-- Profile Dropdown -->
+    <div class="profile-icon">
+      👤
+      <div class="profile-dropdown">
+        <a href="#">Profile</a>
+        <a href="#">Change Password</a>
+        <a href="#">Payment</a>
+        <a href="#">History</a>
+        <a href="#">Privacy</a>
+        <a href="#">Language</a>
+        <a href="#">Logout</a>
+      </div>
+    </div>
   </header>
 
-    <main>
-        <section class="hero">
-            <div class="hero-text">
-                <h1>Book Your<br>Comfort Stay!</h1>
-                <button class="login-btn">Login</button>
-                <button class="signup-btn">Sign Up</button>
-            </div>
-            <div class="hero-image">
-                <img src="{% static 'images/Cover.jpg' %}" alt="Cover Image" style="width:100%; height:auto;">
-            </div>
-
-        </section>
-    </main>
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Book Your<br>Comfort Stay!</h1>
+        <button class="login-btn">Login</button>
+        <button class="signup-btn">Sign Up</button>
+      </div>
+      <div class="hero-image">
+        <img src="{% static 'images/Cover.jpg' %}" alt="Cover Image" style="width:100%; height:auto;">
+      </div>
+    </section>
+  </main>
 </body>
 
 </html>
