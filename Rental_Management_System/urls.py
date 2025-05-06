@@ -29,5 +29,6 @@ urlpatterns = [
     path('upload_property/',f_views.upload_property,name='upload_property'),
     path('delete_property/<str:id>',f_views.delete_property,name = 'delete_property'),
     path('login/', f_views.user_login, name='login'),
+    path('property/<int:id>/', f_views.property_details, name='property_details'),
 
-]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+              ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

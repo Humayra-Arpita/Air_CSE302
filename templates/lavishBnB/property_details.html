@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+<div class="container mt-4">
+  <h2>{{ p.title }}</h2>
+  <p><strong>Location:</strong> {{ property.location }}</p>
+  <p><strong>Category:</strong> {{ property.category }}</p>
+  <p><strong>Description:</strong> {{ property.description }}</p>
+  <p><strong>Price per night:</strong> ${{ property.price_per_night }}</p>
+  <p><strong>Available from:</strong> {{ property.available_from }}</p>
+  <p><strong>Available to:</strong> {{ property.available_to }}</p>
+  <p><strong>Max guests:</strong> {{ property.max_guests }}</p>
+</div>
+
+{% endblock %}

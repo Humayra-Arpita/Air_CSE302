@@ -1,0 +1,26 @@
+{% extends 'base.html'%}
+{% block content %}
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Details</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {%for p in featured_properties%}
+    <tr>
+      <td>{{p.title}}</td>
+      <td><a href="{% url 'property_details' p.id %}" class="btn btn-outline-success">Details</a></td>
+      <td><button type="button" class="btn btn-info">Update</button><td>
+      <td><button type="button" class="btn btn-danger">Delete</button><//td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

@@ -15,6 +15,16 @@ def Home(request):
 def cover(request):
     return render(request, template_name='cover.html')
 
+def property_details(request,id):
+    property = Property.objects.get(pk = id)
+    context = {
+        'property': property,
+    }
+
+    return render(request,template_name = 'lavishBnB/property_details.html',context = context)
+
+
+
 def properties(request):
     all_properties = Property.objects.all()
     context = {
