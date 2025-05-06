@@ -86,7 +86,7 @@
         }
 
         .hero-image img {
-            max-width: 90%;
+            max-width: 100%;
             height: auto;
         }
     </style>
@@ -95,15 +95,15 @@
 
 <body>
     <header>
-        <div class="logo">🏠 LavishBnB</div>
-        <nav>
-            <a href="#">Home</a>
-            <div class="dropdown">Services ▼</div>
-            <div class="dropdown">Help ▼</div>
-            <div class="dropdown">Contact ▼</div>
-        </nav>
-        <div class="user-icon">👤</div>
-    </header>
+    <div class="logo">🏠 <span>LavishBnB</span></div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Services ▼</a>
+      <a href="#">Help ▼</a>
+      <a href="#">Contact ▼</a>
+    </nav>
+    <div class="profile-icon">👤</div>
+  </header>
 
     <main>
         <section class="hero">
@@ -113,9 +113,9 @@
                 <button class="signup-btn">Sign Up</button>
             </div>
             <div class="hero-image">
-                <img src="Cover.jpg" alt="Hero Illustration" />
+                <img src="{% static 'images/Cover.jpg' %}" alt="Cover Image" style="width:100%; height:auto;">
             </div>
-            
+
         </section>
     </main>
 </body>
