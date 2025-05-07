@@ -122,15 +122,24 @@
 
     .hero {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       padding: 50px;
       position: relative;
       z-index: 1;
+      min-height: 80vh;
     }
 
     .hero-text {
       flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;     /* Center horizontally */
+      gap: 20px;               /* Space between elements */
+      flex: 1;
+      justify-content: center; /* Center vertically */
+      height: 100%;            /* Take full height of the section */
+      text-align: center;      /* Center the text inside <h1> */
     }
 
     .hero-text h1 {
@@ -162,6 +171,40 @@
     .hero-image img {
       max-width: 100%;
       height: auto;
+    }
+
+    .login-btn {
+      display: inline-block;
+      padding: 15px 30px;
+      margin: 15px 0;
+      border: none;
+      font-size: 1.2rem;
+      font-style: italic;
+      border-radius: 25px;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      background: linear-gradient(to right, #ffce58, #ff6e6e);
+      color: #000;
+      text-decoration: none;
+      text-align: center;
+      margin: 5px 0;
+    }
+
+    .signup-btn {
+      display: inline-block;
+      padding: 15px 30px;
+      margin: 15px 0;
+      border: none;
+      font-size: 1.2rem;
+      font-style: italic;
+      border-radius: 25px;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      background: linear-gradient(to right, #ffce58, #ff6e6e);
+      color: #000;
+      text-decoration: none;
+      text-align: center;
+      margin: 5px 0;
     }
   </style>
 </head>
@@ -214,7 +257,7 @@
     <div class="profile-icon">
       👤
       <div class="profile-dropdown">
-        <a href="#">Profile</a>
+        <a href="{% url 'profile' %}">Profile</a>
         <a href="#">Change Password</a>
         <a href="#">Payment</a>
         <a href="#">History</a>
@@ -229,8 +272,9 @@
     <section class="hero">
       <div class="hero-text">
         <h1>Book Your<br>Comfort Stay!</h1>
-        <button class="login-btn">Login</button>
-        <button class="signup-btn">Sign Up</button>
+        <a href="{% url 'login' %}" class="login-btn">Login</a>
+        <a href="{% url 'signup' %}" class="signup-btn">Sign Up</a>
+
       </div>
       <div class="hero-image">
         <img src="{% static 'images/Cover.jpg' %}" alt="Cover Image" style="width:100%; height:auto;">

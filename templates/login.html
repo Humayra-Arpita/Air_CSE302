@@ -1,152 +1,175 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Login</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background-color: #ffffff;
-        }
-
-        .navbar {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1rem 2rem;
-            background: #ffffff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            position: fixed;
-            top: 0;
-            z-index: 10;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #5a5a5a;
-        }
-
-        .logo img {
-            width: 30px;
-            margin-right: 10px;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: #5a5a5a;
-            font-size: 1.1rem;
-            position: relative;
-        }
-
-        nav ul li a::after {
-            content: '✓';
-            font-size: 0.8rem;
-            margin-left: 5px;
-        }
-
-        .profile-icon img {
-            width: 30px;
-            height: 30px;
-            border: 2px solid #ffd700;
-            border-radius: 50%;
-            padding: 3px;
-        }
-
-        .background {
-            background: url('background-illustration.jpg') center/contain no-repeat;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding-top: 100px;
-        }
-
-        .login-box {
-            background: white;
-            padding: 2rem;
-            width: 300px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            border-radius: 10px;
-            text-align: center;
-        }
-
-        .login-box h1 {
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        form label {
-            text-align: left;
-            font-weight: 600;
-            margin-bottom: 5px;
-            margin-top: 10px;
-        }
-
-        form input {
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .forgot {
-            text-align: right;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            color: #666;
-            text-decoration: none;
-        }
-
-        button {
-            padding: 10px;
-            background-color: #5d5dfb;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #4b4bc7;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LavishBnB Login</title>
+  <link rel="stylesheet" href="login.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
 </head>
+<style>
+    /* Reset & base styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+}
+
+/* Header */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  border-bottom: 2px solid #aaa;
+}
+
+.logo span {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  color: #889178;
+  margin-left: 5px;
+}
+
+nav a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: #555;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.profile-icon {
+  font-size: 24px;
+  border: 2px solid orange;
+  border-radius: 50%;
+  padding: 5px 10px;
+  color: orange;
+}
+
+/* Main layout */
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 100px);
+  position: relative;
+  padding: 40px;
+}
+
+/* Login box */
+.login-container {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  z-index: 2;
+  width: 320px;
+}
+
+.login-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-box h2 {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.login-box label {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.login-box input {
+  padding: 10px;
+  font-size: 14px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.forgot-password {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 20px;
+  text-decoration: none;
+}
+
+.login-box button {
+  background-color: #5a6ff1;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Background */
+.background-illustration {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  z-index: 1;
+}
+
+.background-illustration img {
+  width: 100%;
+  height: auto;
+}
+
+</style>
 <body>
-    <h2>Login</h2>
-    {% if messages %}
-        {% for message in messages %}
-            <p style="color:red">{{ message }}</p>
-        {% endfor %}
-    {% endif %}
-    <form method="POST">
-        {% csrf_token %}
-        <label>Username:</label><br>
-        <input type="text" name="username"><br><br>
-        <label>Password:</label><br>
-        <input type="password" name="password"><br><br>
-        <button type="submit">Login</button>
-    </form>
+
+  <header>
+    <div class="logo">🏠 <span>LavishBnB</span></div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Services ▼</a>
+      <a href="#">Help ▼</a>
+      <a href="#">Contact ▼</a>
+    </nav>
+    <div class="profile-icon">👤</div>
+  </header>
+
+  <main>
+    <div class="login-container">
+      <form class="login-box" method="POST" action="{% url 'login' %}">
+      {% csrf_token %}
+            <h2>Login</h2>
+
+            {% if messages %}
+              <ul>
+                {% for message in messages %}
+                  <li style="color: red; font-size: 14px; list-style: none; text-align: center;">{{ message }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+
+            <label for="username"><b>Username:</b></label>
+            <input type="text" name="username" id="username" placeholder="Username" required>
+
+            <label for="password"><b>Password:</b></label>
+            <input type="password" name="password" id="password" placeholder="Password" required>
+
+            <a href="#" class="forgot-password">Forget Password</a>
+
+            <button type="submit">Login</button>
+      </form>
+
+    </div>
+
+    <div class="hero-image">
+        <img src="{% static 'images/Cover.jpg' %}" alt="Cover Image" style="width:100%; height:auto;">
+      </div>
+
+  </main>
 </body>
 </html>

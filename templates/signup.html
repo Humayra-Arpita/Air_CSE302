@@ -1,0 +1,230 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LavishBnB Sign Up</title>
+  <link rel="stylesheet" href="{% static 'styles.css' %}" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+</head>
+
+<style>
+  /* Reuse login styles for consistency */
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px;
+    border-bottom: 2px solid #aaa;
+  }
+
+  .logo span {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    color: #889178;
+    margin-left: 5px;
+  }
+
+  nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #555;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: bold;
+  }
+
+  .profile-icon {
+    font-size: 24px;
+    border: 2px solid orange;
+    border-radius: 50%;
+    padding: 5px 10px;
+    color: orange;
+  }
+
+  main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 100px);
+    position: relative;
+    padding: 40px;
+  }
+
+  .signup-container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    z-index: 2;
+    width: 320px;
+  }
+
+  .signup-box {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .signup-box h2 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .signup-box p {
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+
+  .signup-box input {
+    padding: 10px;
+    font-size: 14px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .signup-box button {
+    background-color: #5a6ff1;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 15px;
+  }
+
+  .remember-me {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 15px;
+  }
+
+  .quick-access {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: #888;
+    margin: 20px 0 10px;
+  }
+
+  .quick-access hr {
+    flex: 1;
+    border: none;
+    border-top: 1px solid #ccc;
+  }
+
+  .access-quickly {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .access-quickly button {
+    flex: 1;
+    padding: 10px;
+    font-size: 13px;
+    border: 1px solid #ccc;
+    background-color: #f5f5f5;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  .signin-link {
+    text-align: center;
+    font-size: 13px;
+    color: #555;
+  }
+
+  .signin-link a {
+    color: #5a6ff1;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .background-illustration {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 50%;
+    z-index: 1;
+  }
+
+  .background-illustration img {
+    width: 100%;
+    height: auto;
+  }
+</style>
+
+<body>
+  <header>
+    <div class="logo">🏠 <span>LavishBnB</span></div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Services ▼</a>
+      <a href="#">Help ▼</a>
+      <a href="#">Contact ▼</a>
+    </nav>
+    <div class="profile-icon">👤</div>
+  </header>
+
+  <main>
+    <div class="signup-container">
+      <form class="signup-box" method="post" action="{% url 'signup' %}">
+        {% csrf_token %}
+        <h2>Sign up</h2>
+        <p>Sign up to continue</p>
+
+        {% if messages %}
+          <ul>
+            {% for message in messages %}
+              <li style="color: red; font-size: 14px; list-style: none; text-align: center;">{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+
+        <label class="remember-me">
+          <input type="checkbox" /> Remember me
+        </label>
+
+        <button type="submit">Sign Up</button>
+
+        <div class="quick-access">
+          <hr />
+          <span>Access Quickly</span>
+          <hr />
+        </div>
+
+        <div class="access-quickly">
+          <button type="button">Google</button>
+          <button type="button">LinkedIn</button>
+          <button type="button">SSO</button>
+        </div>
+
+        <p class="signin-link">Already have an account? <a href="{% url 'login' %}">Login</a></p>
+      </form>
+    </div>
+
+    <div class="background-illustration">
+      <img src="{% static 'images/Cover.jpg' %}" alt="Background Illustration" />
+    </div>
+  </main>
+</body>
+</html>
