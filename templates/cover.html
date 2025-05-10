@@ -1,4 +1,6 @@
 {% load static %}
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -131,7 +133,7 @@
     }
 
     .hero-text {
-      flex: 1;
+      flex: 0.4;
       display: flex;
       flex-direction: column;
       align-items: center;     /* Center horizontally */
@@ -213,7 +215,7 @@
   <header>
     <div class="logo">🏠 <span>LavishBnB</span></div>
     <nav>
-      <a href="#">Home</a>
+      <a href="{% url 'home' %}">Home</a>
 
       <!-- Services Dropdown -->
       <div class="dropdown">
@@ -229,6 +231,8 @@
           <a href="#">Top District</a>
           <a href="#">Amazing Pools</a>
           <a href="#">Historical Homes</a>
+          <a href="#">Villa</a>
+          <a href="#">Apartment</a>
         </div>
       </div>
 

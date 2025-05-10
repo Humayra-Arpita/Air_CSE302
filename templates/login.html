@@ -1,175 +1,116 @@
 {% load static %}
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LavishBnB Login</title>
-  <link rel="stylesheet" href="login.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+  <title>Login - LavishBnB</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-image: url("{% static 'images/Cover.jpg' %}");
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .overlay {
+      backdrop-filter: blur(8px);
+      background-color: rgba(255, 255, 255, 0.2);
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 0;
+    }
+
+    .login-box {
+      position: relative;
+      z-index: 1;
+      max-width: 400px;
+      margin: 100px auto;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #4a4a1d;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin: 10px 0 5px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      font-size: 1rem;
+      font-style: italic;
+      background: linear-gradient(to right, #ffce58, #ff6e6e);
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      color: #000;
+      font-weight: bold;
+    }
+
+    .extra {
+      margin-top: 20px;
+      font-size: 0.9rem;
+    }
+
+    a {
+      color: #4a4a1d;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
-<style>
-    /* Reset & base styles */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #fff;
-}
-
-/* Header */
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px 40px;
-  border-bottom: 2px solid #aaa;
-}
-
-.logo span {
-  font-family: 'Playfair Display', serif;
-  font-size: 24px;
-  color: #889178;
-  margin-left: 5px;
-}
-
-nav a {
-  margin: 0 15px;
-  text-decoration: none;
-  color: #555;
-  font-size: 20px;
-  font-style: italic;
-  font-weight: bold;
-}
-
-.profile-icon {
-  font-size: 24px;
-  border: 2px solid orange;
-  border-radius: 50%;
-  padding: 5px 10px;
-  color: orange;
-}
-
-/* Main layout */
-main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: calc(100vh - 100px);
-  position: relative;
-  padding: 40px;
-}
-
-/* Login box */
-.login-container {
-  background-color: #fff;
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-  z-index: 2;
-  width: 320px;
-}
-
-.login-box {
-  display: flex;
-  flex-direction: column;
-}
-
-.login-box h2 {
-  text-align: center;
-  font-size: 28px;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-.login-box label {
-  margin-bottom: 5px;
-  font-size: 14px;
-}
-
-.login-box input {
-  padding: 10px;
-  font-size: 14px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.forgot-password {
-  font-size: 13px;
-  color: #888;
-  margin-bottom: 20px;
-  text-decoration: none;
-}
-
-.login-box button {
-  background-color: #5a6ff1;
-  color: #fff;
-  border: none;
-  padding: 12px;
-  font-size: 16px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-/* Background */
-.background-illustration {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 50%;
-  z-index: 1;
-}
-
-.background-illustration img {
-  width: 100%;
-  height: auto;
-}
-
-</style>
 <body>
+  <div class="overlay"></div>
 
-  <header>
-    <div class="logo">🏠 <span>LavishBnB</span></div>
-    <nav>
-      <a href="#">Home</a>
-      <a href="#">Services ▼</a>
-      <a href="#">Help ▼</a>
-      <a href="#">Contact ▼</a>
-    </nav>
-    <div class="profile-icon">👤</div>
-  </header>
-
-  <main>
-    <div class="login-container">
-      <form class="login-box" method="POST" action="{% url 'login' %}">
+  <div class="login-box">
+    <h2>Login to LavishBnB</h2>
+    <form method="POST" action="{% url 'login' %}">
       {% csrf_token %}
-            <h2>Login</h2>
+      <label for="id_username">Email or Username</label>
+      <input type="text" id="id_username" name="username" placeholder="Enter your username or email" required autocomplete="username" />
 
-            {% if messages %}
-              <ul>
-                {% for message in messages %}
-                  <li style="color: red; font-size: 14px; list-style: none; text-align: center;">{{ message }}</li>
-                {% endfor %}
-              </ul>
-            {% endif %}
+      <label for="id_password">Password</label>
+      <input type="password" id="id_password" name="password" placeholder="Enter your password" required autocomplete="current-password" />
 
-            <label for="username"><b>Username:</b></label>
-            <input type="text" name="username" id="username" placeholder="Username" required>
-
-            <label for="password"><b>Password:</b></label>
-            <input type="password" name="password" id="password" placeholder="Password" required>
-
-            <a href="#" class="forgot-password">Forget Password</a>
-
-            <button type="submit">Login</button>
-      </form>
-
+      <button type="submit">Login</button>
+    </form>
+    <div class="extra">
+      <p>Don't have an account? <a href="{% url 'signup' %}">Sign Up</a></p>
+      <p><a href="#">Forgot Password?</a></p>
     </div>
-
-    <div class="hero-image">
-        <img src="{% static 'images/Cover.jpg' %}" alt="Cover Image" style="width:100%; height:auto;">
-      </div>
-
-  </main>
+  </div>
 </body>
 </html>

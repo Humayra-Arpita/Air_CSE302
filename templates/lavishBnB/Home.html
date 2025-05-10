@@ -1,26 +1,77 @@
 {% extends 'base.html'%}
+{% load static %}
 {% block content %}
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LavishBnB - Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .property-card img {
+            height: 200px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Title</th>
-      <th scope="col">Details</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    {%for p in featured_properties%}
-    <tr>
-      <td>{{p.title}}</td>
-      <td><a href="{% url 'property_details' p.id %}" class="btn btn-outline-success">Details</a></td>
-      <td><button type="button" class="btn btn-info">Update</button><td>
-      <td><button type="button" class="btn btn-danger">Delete</button><//td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+<!-- Hero Section -->
+<section class="bg-light text-dark py-5 text-center">
+    <div class="container">
+        <h1 class="logo">🏠 <span>LavishBnB</span></h1>
+        <h1 class="display-4 fw-bold">Find Your Next Stay</h1>
+        <p class="lead">Book unique places to stay on LavishBnB.</p>
+        <form class="row g-2 justify-content-center mt-4">
+            <div class="col-md-3">
+                <input type="text" class="form-control" placeholder="Search destination">
+            </div>
+            <div class="col-md-2">
+                <input type="date" class="form-control">
+            </div>
+            <div class="col-md-2">
+                <input type="date" class="form-control">
+            </div>
+            <div class="col-md-1">
+                <button type="submit" class="btn btn-primary w-100">Search</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- Featured Properties -->
+<section class="container my-5">
+    <h2 class="mb-4 text-center">Featured Properties</h2>
+    <div class="row">
+        {% for property in featured_properties %}
+            <div class="col-md-4 mb-4">
+                <div class="card property-card shadow-sm">
+                    {% if property.images.first %}
+                        <img src="{{ property.images.first.image.url }}" class="card-img-top" alt="Property Image">
+                    {% else %}
+                        <img src="{% static 'images/placeholder.png' %}" class="card-img-top" alt="No image">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ property.title }}</h5>
+                        <p class="card-text text-muted">{{ property.location.city }}, {{ property.location.country }}</p>
+                        <p class="card-text fw-bold">${{ property.price_per_night }} / night</p>
+                        <a href="{% url 'property_details' property.id %}" class="btn btn-outline-primary btn-sm">View Details</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-dark text-white text-center py-4 mt-5">
+    <p class="mb-0">© 2025 LavishBnB. All rights reserved.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
 
 {% endblock %}

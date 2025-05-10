@@ -22,7 +22,7 @@ from lavishBnB import views as f_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', f_views.Home, name ='Home'),
+    path('', f_views.Home, name='home'),
     path('properties/', f_views.properties, name ='properties'),
     path('cover/', f_views.cover, name ='cover'),
     path('rent_details/', f_views.rent_details, name ='rent_details'),

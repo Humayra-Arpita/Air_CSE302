@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Renamed Users to CustomUser for clarity
 class CustomUser(models.Model):
@@ -13,6 +14,16 @@ class CustomUser(models.Model):
 
     def __str__(self):
         return self.username or "Unnamed User"
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_picture = models.ImageField(upload_to='lavishbnb/', null=True, blank=True)
+    phone_number = models.CharField(max_length=15)
+    nid_number = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.user.username
 
 
 class Category(models.Model):
@@ -87,3 +98,9 @@ class Contact(models.Model):
     email = models.EmailField()
     message = models.TextField()
     sent_at = models.DateTimeField(auto_now_add=True)
+
+class Service(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name

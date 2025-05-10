@@ -1,9 +1,13 @@
 from django.contrib.auth.models import User
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 from .forms import *
 from django.shortcuts import get_object_or_404
 from lavishBnB import views as f_views
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+
 
 
 # Create your views here.
@@ -31,10 +35,25 @@ def property_details(request, id):
 
 def properties(request):
     all_properties = Property.objects.all()
+    city = request.GET.get('city')
+    min_price = request.GET.get('min_price')
+    max_price = request.GET.get('max_price')
+    category = request.GET.get('category')
+    if city:
+        all_properties = all_properties.filter(location__city__icontains=city)
+    if min_price:
+        all_properties = all_properties.filter(price_per_night__gte=min_price)
+    if max_price:
+        all_properties = all_properties.filter(price_per_night__lte=max_price)
+    if category:
+        all_properties = all_properties.filter(category__id=category)
+
     context = {
-        'all_properties': all_properties
+        'all_properties': all_properties,
+        'categories': Category.objects.all()  # For dropdown
     }
     return render(request, template_name='lavishBnB/Properties.html', context=context)
+
 
 
 def rent_details(request):
@@ -73,9 +92,6 @@ def delete_property(request, id):
     return render(request, 'delete_property.html', {'property': prop})
 
 
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
-from django.contrib import messages
 
 
 def user_login(request):
@@ -86,7 +102,7 @@ def user_login(request):
 
         if user is not None:
             login(request, user)
-            return redirect('home')  # or any page after login
+            return redirect('profile')  # or any page after login
         else:
             messages.error(request, 'Invalid username or password')
             return redirect('login')
@@ -97,6 +113,17 @@ def user_login(request):
 def profile_view(request):
     user = request.user  # Make sure user is authenticated
     return render(request, 'profile.html', {'user': user})
+
+def update_profile(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')  # Redirect to the profile page after saving
+    else:
+        form = ProfileForm(instance=request.user.profile)
+
+    return render(request, 'profile.html', {'form': form})
 
 def signup_view(request):
     if request.method == 'POST':
