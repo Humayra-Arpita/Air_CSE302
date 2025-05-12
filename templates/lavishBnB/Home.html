@@ -8,19 +8,210 @@
     <meta charset="UTF-8">
     <title>LavishBnB - Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
-        .property-card img {
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: white;
+      color: #333;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      border-bottom: 2px solid #222;
+      background: #fff;
+      position: relative;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #4a4a1d;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    nav a,
+    .dropdown {
+      margin: 0 15px;
+      font-weight: bold;
+      font-style: italic;
+      cursor: pointer;
+      position: relative;
+      color: #333;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .property-card img {
             height: 200px;
             object-fit: cover;
         }
-    </style>
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #f9f9f9;
+      min-width: 180px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      border-radius: 5px;
+    }
+
+    .dropdown-content a {
+      color: #333;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      font-style: normal;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+
+    .dropdown:hover .dropdown-content,
+    .dropdown-content:hover {
+      display: block;
+    }
+
+    .profile-icon {
+      border: 1px solid orange;
+      border-radius: 50%;
+      padding: 10px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .profile-dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: #f9f9f9;
+      min-width: 200px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      border-radius: 5px;
+    }
+
+    .profile-dropdown a {
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      color: #333;
+      font-style: normal;
+    }
+
+    .profile-dropdown a:hover {
+      background-color: #f1f1f1;
+    }
+
+    .profile-icon:hover .profile-dropdown {
+      display: block;
+    }
+
+    .hero {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 50px;
+      position: relative;
+      z-index: 1;
+      min-height: 80vh;
+    }
+
+    .hero-text {
+      flex: 0.4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;     /* Center horizontally */
+      gap: 20px;               /* Space between elements */
+      flex: 1;
+      justify-content: center; /* Center vertically */
+      height: 100%;            /* Take full height of the section */
+      text-align: center;      /* Center the text inside <h1> */
+    }
+
+    .hero-text h1 {
+      font-size: 3rem;
+      font-style: italic;
+      color: #4a4a1d;
+      margin-bottom: 30px;
+    }
+  </style>
 </head>
 <body>
+<header>
+    <div class="logo">🏠 <span>LavishBnB</span></div>
+    <nav>
+      <!-- Services Dropdown -->
+      <div class="dropdown">
+        <span>Services ▼</span>
+        <div class="dropdown-content">
+          <a href="#">Hills</a>
+          <a href="#">Trending</a>
+          <a href="#">Mansion</a>
+          <a href="#">Camping</a>
+          <a href="#">Farmhouse</a>
+          <a href="#">Beach Front</a>
+          <a href="#">House Boats</a>
+          <a href="#">Top District</a>
+          <a href="#">Amazing Pools</a>
+          <a href="#">Historical Homes</a>
+          <a href="#">Villa</a>
+          <a href="#">Apartment</a>
+        </div>
+      </div>
+
+      <!-- Help Dropdown -->
+      <div class="dropdown">
+        <span>Help ▼</span>
+        <div class="dropdown-content">
+          <a href="#">Host HelpCentre</a>
+          <a href="#">Guest HelpCentre</a>
+          <a href="#">Guidance Centre</a>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div class="dropdown">
+        <span>Contact ▼</span>
+        <div class="dropdown-content">
+          <a href="#">Send Message</a>
+          <a href="#">Online Booking</a>
+          <a href="#">HelpLine</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Profile Dropdown -->
+    <div class="profile-icon">
+      👤
+        <a href="{% url 'cover' %}">Login Page</a>
+    </div>
+  </header>
 
 <!-- Hero Section -->
 <section class="bg-light text-dark py-5 text-center">
     <div class="container">
-        <h1 class="logo">🏠 <span>LavishBnB</span></h1>
         <h1 class="display-4 fw-bold">Find Your Next Stay</h1>
         <p class="lead">Book unique places to stay on LavishBnB.</p>
         <form class="row g-2 justify-content-center mt-4">
@@ -55,7 +246,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ property.title }}</h5>
                         <p class="card-text text-muted">{{ property.location.city }}, {{ property.location.country }}</p>
-                        <p class="card-text fw-bold">${{ property.price_per_night }} / night</p>
+                        <p class="card-text fw-bold">{{ property.price_per_night }} Tk/ night</p>
                         <a href="{% url 'property_details' property.id %}" class="btn btn-outline-primary btn-sm">View Details</a>
                     </div>
                 </div>
