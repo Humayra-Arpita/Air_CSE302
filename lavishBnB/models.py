@@ -13,7 +13,7 @@ class CustomUser(models.Model):
     bio = models.TextField(blank=True)
 
     def __str__(self):
-        return self.username or "Unnamed User"
+        return self.username
 
 
 class UserProfile(models.Model):

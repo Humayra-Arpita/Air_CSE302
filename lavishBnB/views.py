@@ -127,19 +127,23 @@ def update_profile(request):
 
 def signup_view(request):
     if request.method == 'POST':
-        name = request.POST.get('name')
+        username = request.POST.get('username')
         email = request.POST.get('email')
-        password = request.POST.get('password')
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
 
-        if User.objects.filter(username=email).exists():
-            messages.error(request, "Email already exists.")
+        if password1 != password2:
+            messages.error(request, "Passwords do not match.")
             return redirect('signup')
 
-        user = User.objects.create_user(username=email, email=email, password=password)
-        user.first_name = name
+        if User.objects.filter(username=username).exists():
+            messages.error(request, "Username already exists.")
+            return redirect('signup')
+
+        user = User.objects.create_user(username=username, email=email, password=password1)
         user.save()
 
         messages.success(request, "Account created successfully!")
-        return redirect('signup')  # or redirect to login page
+        return redirect('login')  # Better than redirecting to signup again
 
     return render(request, 'signup.html')

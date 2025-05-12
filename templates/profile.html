@@ -145,25 +145,17 @@
       </div>
       <div class="right-section">
         <div class="info-row">
-          <div class="icon"></div>
-          <div class="label">NAME:</div>
-          <div class="value">Roza Khan</div>
-        </div>
-        <div class="info-row">
-          <div class="icon"></div>
-          <div class="label">EMAIL:</div>
-          <div class="value">rozakhan@gmail.com</div>
-        </div>
-        <div class="info-row">
-          <div class="icon"></div>
-          <div class="label">Phone Number:</div>
-          <div class="value">01733344455</div>
-        </div>
-        <div class="info-row">
-          <div class="icon"></div>
-          <div class="label">NID Number:</div>
-          <div class="value">1234567890</div>
-        </div>
+  <div class="icon"></div>
+  <div class="label">NAME:</div>
+  <div class="value">{{ user.get_full_name|default:user.username }}</div>
+</div>
+<div class="info-row">
+  <div class="icon"></div>
+  <div class="label">EMAIL:</div>
+  <div class="value">{{ user.email }}</div>
+</div>
+
+
       </div>
     </div>
   </main>
