@@ -1,6 +1,16 @@
 {% load static %}
 {% extends 'base.html'%}
+<form method="GET" action="{% url 'search_results' %}">
+  <input type="text" name="q" placeholder="Search by title or location" required>
+  <button type="submit">Search</button>
+</form>
+
+
 {% block content %}
+
+
+
+
 <table class="table">
   <thead>
     <tr>

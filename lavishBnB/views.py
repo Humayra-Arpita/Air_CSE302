@@ -7,13 +7,15 @@ from lavishBnB import views as f_views
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 
 
 # Create your views here.
 
 def Home(request):
-    featured_properties = Property.objects.all()[:6]
+    featured_properties = Property.objects.all()
     context = {
         'featured_properties': featured_properties
     }
@@ -125,21 +127,70 @@ def update_profile(request):
 
     return render(request, 'profile.html', {'form': form})
 
+    
+
 def signup_view(request):
     if request.method == 'POST':
-        name = request.POST.get('name')
+        username = request.POST.get('username')
         email = request.POST.get('email')
-        password = request.POST.get('password')
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
 
-        if User.objects.filter(username=email).exists():
-            messages.error(request, "Email already exists.")
+        if password1 != password2:
+            messages.error(request, "Passwords do not match.")
             return redirect('signup')
 
-        user = User.objects.create_user(username=email, email=email, password=password)
-        user.first_name = name
+        if User.objects.filter(username=username).exists():
+            messages.error(request, "Username already exists.")
+            return redirect('signup')
+
+        user = User.objects.create_user(username=username, email=email, password=password1)
         user.save()
 
         messages.success(request, "Account created successfully!")
-        return redirect('signup')  # or redirect to login page
+        return redirect('login')  # Better than redirecting to signup again
 
     return render(request, 'signup.html')
+
+
+
+
+from django.shortcuts import render
+from django.db.models import Q
+from .models import Property
+
+def search_results(request):
+    query = request.GET.get('q')
+    if query:
+        results = Property.objects.filter(
+            Q(title__icontains=query) |
+            Q(location__city__icontains=query) |
+            Q(location__country__icontains=query)
+        )
+    else:
+        results = Property.objects.none()
+
+    message = None
+    if not results:
+        message = f'No results found for "{query}". Try something else.'
+
+    return render(request, 'lavishBnB/search_results.html', {
+        'query': query,
+        'results': results,
+        'message': message
+    })
+
+
+
+
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')  # Redirect to login page after logout
+
+
+def contact_us_view(request):
+    return render(request, 'contact_us.html')
+

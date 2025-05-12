@@ -7,6 +7,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Login - LavishBnB</title>
+  
   <style>
     body {
       margin: 0;
@@ -94,7 +95,10 @@
 </head>
 <body>
   <div class="overlay"></div>
-
+ <div class="form-check mb-3">
+  <input type="checkbox" class="form-check-input" id="remember_me" name="remember_me">
+  <label class="form-check-label" for="remember_me">Remember me</label>
+</div>
   <div class="login-box">
     <h2>Login to LavishBnB</h2>
     <form method="POST" action="{% url 'login' %}">

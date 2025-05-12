@@ -1,0 +1,143 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment | LavishBnB</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f9f9f9;
+            padding: 40px;
+        }
+
+        .payment-container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4a4a1d;
+            margin-bottom: 30px;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .payment-option input[type="radio"] {
+            margin-right: 15px;
+            width: 20px;
+            height: 20px;
+        }
+
+        .payment-option label {
+            font-weight: bold;
+        }
+
+        .payment-option input[type="text"] {
+            padding: 10px;
+            width: 100%;
+            margin-top: 10px;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .payment-option input[type="text"]:focus {
+            border-color: #ff6e6e;
+            outline: none;
+        }
+
+        .payment-option input[type="radio"]:checked + label {
+            color: #ff6e6e;
+        }
+
+        .submit-btn {
+            background: linear-gradient(to right, #ffce58, #ff6e6e);
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .submit-btn:hover {
+            background-color: #ff6e6e;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="payment-container">
+        <h1>Choose Payment Method</h1>
+
+        <!-- Bkash Option -->
+        <div class="payment-option">
+            <input type="radio" id="bkash" name="payment" value="bkash">
+            <label for="bkash">Bkash</label>
+        </div>
+        <div class="payment-option">
+            <input type="text" id="bkash_number" name="bkash_number" placeholder="Enter Bkash Number" disabled>
+        </div>
+
+        <!-- Nagad Option -->
+        <div class="payment-option">
+            <input type="radio" id="nagad" name="payment" value="nagad">
+            <label for="nagad">Nagad</label>
+        </div>
+        <div class="payment-option">
+            <input type="text" id="nagad_number" name="nagad_number" placeholder="Enter Nagad Number" disabled>
+        </div>
+
+        <!-- Cash on Hand Option -->
+        <div class="payment-option">
+            <input type="radio" id="cash_on_hand" name="payment" value="cash_on_hand">
+            <label for="cash_on_hand">Cash on Hand</label>
+        </div>
+        <div class="payment-option">
+            <input type="text" id="cash_number" name="cash_number" placeholder="Enter Cash on Hand Number" disabled>
+        </div>
+
+        <button class="submit-btn">Submit Payment</button>
+    </div>
+
+    <script>
+        // Enable the text field based on the selected payment method
+        document.querySelectorAll('input[name="payment"]').forEach((radio) => {
+            radio.addEventListener('change', function () {
+                // Disable all text fields first
+                document.getElementById('bkash_number').disabled = true;
+                document.getElementById('nagad_number').disabled = true;
+                document.getElementById('cash_number').disabled = true;
+
+                // Enable the appropriate text field based on the selected radio button
+                if (this.value === 'bkash') {
+                    document.getElementById('bkash_number').disabled = false;
+                } else if (this.value === 'nagad') {
+                    document.getElementById('nagad_number').disabled = false;
+                } else if (this.value === 'cash_on_hand') {
+                    document.getElementById('cash_number').disabled = false;
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

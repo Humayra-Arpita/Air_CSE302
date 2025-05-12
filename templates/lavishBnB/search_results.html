@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+  <h2>Search Results for "{{ query }}"</h2>
+
+  {% if message %}
+    <div class="alert alert-warning">{{ message }}</div>
+  {% endif %}
+
+  {% if results %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Location</th>
+          <th>Category</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in results %}
+          <tr>
+            <td>{{ p.title }}</td>
+            <td>
+              {% if p.location %}
+                {{ p.location.city }}, {{ p.location.country }}
+              {% else %}
+                No location available
+              {% endif %}
+            </td>
+            <td>{{ p.category.name }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No results found.</p>
+  {% endif %}
+</div>
+{% endblock %}
