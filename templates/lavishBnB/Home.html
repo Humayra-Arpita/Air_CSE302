@@ -59,9 +59,15 @@
     }
 
     .property-card img {
+<<<<<<< HEAD
         height: 200px;
         object-fit: cover;
     }
+=======
+            height: 200px;
+            object-fit: cover;
+        }
+>>>>>>> f4efd8741dbae5ceb390ad2ef871c98cd4b9b38a
 
     .dropdown-content {
       display: none;
@@ -142,12 +148,21 @@
       flex: 0.4;
       display: flex;
       flex-direction: column;
+<<<<<<< HEAD
       align-items: center;
       gap: 20px;
       flex: 1;
       justify-content: center;
       height: 100%;
       text-align: center;
+=======
+      align-items: center;     /* Center horizontally */
+      gap: 20px;               /* Space between elements */
+      flex: 1;
+      justify-content: center; /* Center vertically */
+      height: 100%;            /* Take full height of the section */
+      text-align: center;      /* Center the text inside <h1> */
+>>>>>>> f4efd8741dbae5ceb390ad2ef871c98cd4b9b38a
     }
 
     .hero-text h1 {
@@ -166,6 +181,7 @@
       <div class="dropdown">
         <span>Services ▼</span>
         <div class="dropdown-content">
+<<<<<<< HEAD
           <a href="{% url 'properties_by_category' 'Hills' %}">Hills</a>
           <a href="{% url 'properties_by_category' 'Trending' %}">Trending</a>
           <a href="{% url 'properties_by_category' 'Mansion' %}">Mansion</a>
@@ -178,6 +194,20 @@
           <a href="{% url 'properties_by_category' 'Historical Homes' %}">Historical Homes</a>
           <a href="{% url 'properties_by_category' 'Villa' %}">Villa</a>
           <a href="{% url 'properties_by_category' 'Apartment' %}">Apartment</a>
+=======
+          <a href="#">Hills</a>
+          <a href="#">Trending</a>
+          <a href="#">Mansion</a>
+          <a href="#">Camping</a>
+          <a href="#">Farmhouse</a>
+          <a href="#">Beach Front</a>
+          <a href="#">House Boats</a>
+          <a href="#">Top District</a>
+          <a href="#">Amazing Pools</a>
+          <a href="#">Historical Homes</a>
+          <a href="#">Villa</a>
+          <a href="#">Apartment</a>
+>>>>>>> f4efd8741dbae5ceb390ad2ef871c98cd4b9b38a
         </div>
       </div>
 
@@ -185,9 +215,15 @@
       <div class="dropdown">
         <span>Help ▼</span>
         <div class="dropdown-content">
+<<<<<<< HEAD
            <a class="dropdown-item" href="{% url 'host_help' %}">Host HelpCentre</a>
            <a class="dropdown-item" href="{% url 'guest_help' %}">Guest HelpCentre</a>
            <a class="dropdown-item" href="{% url 'guidance' %}">Guidance Centre</a>
+=======
+          <a href="#">Host HelpCentre</a>
+          <a href="#">Guest HelpCentre</a>
+          <a href="#">Guidance Centre</a>
+>>>>>>> f4efd8741dbae5ceb390ad2ef871c98cd4b9b38a
         </div>
       </div>
 
@@ -195,13 +231,20 @@
       <div class="dropdown">
         <span>Contact ▼</span>
         <div class="dropdown-content">
+<<<<<<< HEAD
           <a href="{% url 'send_message' %}">Send Message</a>
           <a href="{% url 'online_booking' %}">Online Booking</a>
           <a href="{% url 'helpline' %}">HelpLine</a>
+=======
+          <a href="#">Send Message</a>
+          <a href="#">Online Booking</a>
+          <a href="#">HelpLine</a>
+>>>>>>> f4efd8741dbae5ceb390ad2ef871c98cd4b9b38a
         </div>
       </div>
     </nav>
 
+<<<<<<< HEAD
     <!-- Profile Section -->
     {% if user.is_authenticated %}
     <div class="profile-icon">
@@ -219,10 +262,19 @@
     </div>
     {% endif %}
 </header>
+=======
+    <!-- Profile Dropdown -->
+    <div class="profile-icon">
+      👤
+        <a href="{% url 'cover' %}">Login Page</a>
+    </div>
+  </header>
+>>>>>>> f4efd8741dbae5ceb390ad2ef871c98cd4b9b38a
 
 <!-- Hero Section -->
 <section class="bg-light text-dark py-5 text-center">
     <div class="container">
+<<<<<<< HEAD
         {% if user.is_authenticated %}
             <h1 class="display-4 fw-bold">Welcome Back, {{ user.first_name|default:user.username }}</h1>
             <p class="lead">Discover personalized stays on LavishBnB.</p>
@@ -245,6 +297,24 @@
     </div>
 </form>
 
+=======
+        <h1 class="display-4 fw-bold">Find Your Next Stay</h1>
+        <p class="lead">Book unique places to stay on LavishBnB.</p>
+        <form class="row g-2 justify-content-center mt-4">
+            <div class="col-md-3">
+                <input type="text" class="form-control" placeholder="Search destination">
+            </div>
+            <div class="col-md-2">
+                <input type="date" class="form-control">
+            </div>
+            <div class="col-md-2">
+                <input type="date" class="form-control">
+            </div>
+            <div class="col-md-1">
+                <button type="submit" class="btn btn-primary w-100">Search</button>
+            </div>
+        </form>
+>>>>>>> f4efd8741dbae5ceb390ad2ef871c98cd4b9b38a
     </div>
 </section>
 

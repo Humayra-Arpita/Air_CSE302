@@ -160,6 +160,7 @@ def signup_view(request):
 
         messages.success(request, "Account created successfully!")
         return redirect('login')  # Better than redirecting to signup again
+<<<<<<< HEAD
 
     return render(request, 'signup.html')
 
@@ -226,4 +227,6 @@ def guest_help(request):
 def guidance(request):
     return render(request, 'guidance.html')
 
+=======
+>>>>>>> f4efd8741dbae5ceb390ad2ef871c98cd4b9b38a
 

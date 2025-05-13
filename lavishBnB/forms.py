@@ -3,7 +3,7 @@ from django import forms
 from .models import *
 
 
-class ProoertyForm(ModelForm):
+class PropertyForm(ModelForm):
    class Meta:
        model = Property
        fields = '__all__'
