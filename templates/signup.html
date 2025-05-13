@@ -110,10 +110,6 @@
       <label for="id_password2">Confirm Password</label>
       <input type="password" id="id_password2" name="password2" placeholder="Confirm your password" required autocomplete="new-password" />
 
-<div style="text-align: left; margin: 15px 0;">
-  <input type="checkbox" id="remember_me" name="remember_me" {% if request.COOKIES.remembered_username %}checked{% endif %}>
-  <label for="remember_me" style="display: inline; margin-left: 5px;">Remember me</label>
-</div>
       <button type="submit">Sign Up</button>
     </form>
     <div class="extra">

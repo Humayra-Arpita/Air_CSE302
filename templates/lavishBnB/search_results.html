@@ -1,39 +1,45 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-<div class="container mt-5">
-  <h2>Search Results for "{{ query }}"</h2>
+
+<div class="container my-5">
+  <h2 class="mb-4 text-center">Search Results for "{{ query }}"</h2>
 
   {% if message %}
-    <div class="alert alert-warning">{{ message }}</div>
+    <div class="alert alert-warning text-center">{{ message }}</div>
   {% endif %}
 
   {% if results %}
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Location</th>
-          <th>Category</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for p in results %}
-          <tr>
-            <td>{{ p.title }}</td>
-            <td>
-              {% if p.location %}
-                {{ p.location.city }}, {{ p.location.country }}
-              {% else %}
-                No location available
-              {% endif %}
-            </td>
-            <td>{{ p.category.name }}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+    <div class="row">
+      {% for p in results %}
+        <div class="col-md-4 mb-4">
+          <div class="card property-card shadow-sm">
+            {% if p.images.first %}
+              <img src="{{ p.images.first.image.url }}" class="card-img-top" alt="Property Image">
+            {% else %}
+              <img src="{% static 'images/placeholder.png' %}" class="card-img-top" alt="No image">
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{ p.title }}</h5>
+              <p class="card-text text-muted">
+                {% if p.location %}
+                  {{ p.location.city }}, {{ p.location.country }}
+                {% else %}
+                  No location available
+                {% endif %}
+              </p>
+              <p class="card-text">
+                <strong>Category:</strong> {{ p.category.name }}
+              </p>
+              <a href="{% url 'property_details' p.id %}" class="btn btn-outline-primary btn-sm">View Details</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
   {% else %}
-    <p>No results found.</p>
+    <p class="text-center">No results found.</p>
   {% endif %}
 </div>
+
 {% endblock %}

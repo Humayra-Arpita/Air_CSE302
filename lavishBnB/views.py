@@ -9,6 +9,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from .models import Property, Category
 
 
 
@@ -19,7 +20,7 @@ def Home(request):
     context = {
         'featured_properties': featured_properties
     }
-    return render(request, template_name='lavishBnB/Home.html', context=context)
+    return render(request, template_name='lavishBnB/home.html', context=context)
 
 
 def cover(request):
@@ -56,6 +57,14 @@ def properties(request):
     }
     return render(request, template_name='lavishBnB/Properties.html', context=context)
 
+
+def properties_by_category(request, category_name):
+    category = get_object_or_404(Category, name=category_name)
+    properties = Property.objects.filter(category=category)
+    return render(request, 'properties_by_category.html', {
+        'category': category,
+        'properties': properties
+    })
 
 
 def rent_details(request):
@@ -104,12 +113,14 @@ def user_login(request):
 
         if user is not None:
             login(request, user)
-            return redirect('profile')  # or any page after login
+            return redirect('home')  # or any page after login
         else:
             messages.error(request, 'Invalid username or password')
             return redirect('login')
 
     return render(request, 'login.html')
+
+
 
 
 def profile_view(request):
@@ -160,20 +171,24 @@ from django.db.models import Q
 from .models import Property
 
 def search_results(request):
-    query = request.GET.get('q')
+    query = request.GET.get('q', '').strip()  # Strips any leading/trailing whitespace from the query
     if query:
+        # Filter properties based on the search query
         results = Property.objects.filter(
             Q(title__icontains=query) |
             Q(location__city__icontains=query) |
             Q(location__country__icontains=query)
         )
     else:
+        # If no query is provided, return no results
         results = Property.objects.none()
 
+    # If no results were found, set the message
     message = None
     if not results:
         message = f'No results found for "{query}". Try something else.'
 
+    # Render the template with search query, results, and message
     return render(request, 'lavishBnB/search_results.html', {
         'query': query,
         'results': results,
@@ -182,15 +197,33 @@ def search_results(request):
 
 
 
-
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 
 def logout_view(request):
     logout(request)
-    return redirect('login')  # Redirect to login page after logout
+    return redirect('home')  # Redirect to login page after logout
 
 
 def contact_us_view(request):
     return render(request, 'contact_us.html')
+
+def send_message(request):
+    return render(request, 'send_message.html')
+
+def online_booking(request):
+    return render(request, 'online_booking.html')
+
+def helpline(request):
+    return render(request, 'helpline.html')
+
+def host_help(request):
+    return render(request, 'host_help.html')
+
+def guest_help(request):
+    return render(request, 'guest_help.html')
+
+def guidance(request):
+    return render(request, 'guidance.html')
+
 
